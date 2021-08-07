@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-function App() {
+import NotFoundPage from './modules/errors/NotFoundPage';
+import IndexPage from './modules/home/IndexPage';
+import MainLayout from './shared/layouts/main/MainLayout';
+import ConnectWalletModal from './shared/packages/web3/components/ConnectWalletModal';
+
+const App: FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainLayout>
+      <Switch>
+        <Route path="/" exact component={IndexPage} />
+        <Route component={NotFoundPage} />
+      </Switch>
+      <ConnectWalletModal />
+    </MainLayout>
   );
-}
+};
 
 export default App;

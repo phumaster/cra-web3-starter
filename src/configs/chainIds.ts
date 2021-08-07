@@ -1,0 +1,11 @@
+enum ChainIds {
+  ETH_MAINNET = 1,
+  BSC_MAINNET = 56,
+  BSC_TESTNET = 97,
+  MATIC_TESTNET = 80001,
+  MATIC_MAINNET = 137,
+  KCC_TESTNET = 322,
+  KCC_MAINNET = 321,
+}
+
+export default ChainIds;
