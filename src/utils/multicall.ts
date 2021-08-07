@@ -12,7 +12,7 @@ const MulticallAbi = require('../abi/MulticallAbi.json');
 type Call = {
   address: string; // Address of the contract
   name: string; // Function name on the contract (example: balanceOf)
-  params?: any[]; // Function params
+  params?: any[];
 };
 
 type MulticallOptions = {
