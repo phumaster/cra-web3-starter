@@ -1,9 +1,8 @@
 import { FC, useCallback } from 'react';
 
-import ChainIds from '../../configs/chainIds';
 import SwitchNetworkItem from './SwitchNetworkItem';
 import styles from './SwitchNetworkForm.module.scss';
-import { requestNetwork } from '../packages/web3/utils/helper';
+import { switchNetwork } from '../packages/web3/utils/helper';
 import AppConfigs from '../../configs';
 
 type Props = {
@@ -19,11 +18,7 @@ const SwitchNetworkForm: FC<Props> = ({ onClose }) => {
       (async () => {
         try {
           onClose?.();
-          if (item.chainId === ChainIds.ETH_MAINNET) {
-            alert('To switch to Ethereum please do it manually from your wallet menu');
-            return;
-          }
-          await requestNetwork({
+          const switched = await switchNetwork({
             chainId: item.chainId,
             name: item.name,
             currency: {
@@ -34,6 +29,7 @@ const SwitchNetworkForm: FC<Props> = ({ onClose }) => {
             rpcUrls: item.rpcUrls,
             blockExplorerUrls: item.blockExplorerUrls,
           });
+          if (!switched) alert(`To switch to ${item.name} please do it manually from your wallet menu`);
         } catch (e) {
           alert('Cannot switch network');
         }

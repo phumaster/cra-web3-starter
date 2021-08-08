@@ -13,6 +13,18 @@ import ChainIds from '../../../../configs/chainIds';
 
 const { supportedNetworks } = AppConfigs.networks;
 
+type TChainInfo = {
+  chainId: number;
+  name: string;
+  currency: {
+    name: string;
+    symbol: string;
+    decimals: number;
+  };
+  rpcUrls: string[];
+  blockExplorerUrls: string[];
+};
+
 export function getRpcUrl(): string {
   return supportedNetworks[`${ChainIds.BSC_MAINNET}`].rpcUrls[
     Math.floor(Math.random() * supportedNetworks[`${ChainIds.BSC_MAINNET}`].rpcUrls.length)
@@ -63,17 +75,7 @@ export function getConnectorsByName(): { [key: string]: TConnector } {
   };
 }
 
-export async function requestNetwork(options: {
-  chainId: number;
-  name: string;
-  currency: {
-    name: string;
-    symbol: string;
-    decimals: number;
-  };
-  rpcUrls: string[];
-  blockExplorerUrls: string[];
-}): Promise<boolean> {
+export async function requestNetwork(options: TChainInfo): Promise<boolean> {
   const provider = (window as WindowChain).ethereum;
   if (provider) {
     try {
@@ -100,6 +102,29 @@ export async function requestNetwork(options: {
     }
   } else {
     console.error('Cannot setup the network on metamask because window.ethereum is undefined');
+    return false;
+  }
+}
+
+export async function switchNetwork(options: TChainInfo): Promise<boolean> {
+  try {
+    const provider = (window as WindowChain).ethereum;
+    // @ts-ignore
+    await provider.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: `0x${options.chainId.toString(16)}` }],
+    });
+    return true;
+  } catch (switchError) {
+    // This error code indicates that the chain has not been added to MetaMask.
+    if (switchError.code === 4902) {
+      try {
+        await requestNetwork(options);
+        return true;
+      } catch (addError) {
+        return false;
+      }
+    }
     return false;
   }
 }
