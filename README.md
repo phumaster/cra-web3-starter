@@ -40,3 +40,7 @@ To check type errors
 ### `yarn analyze`
 
 To view bundle analyzer
+
+### Add git hooks
+
+Ex: npx husky add .husky/pre-commit "npm test"
