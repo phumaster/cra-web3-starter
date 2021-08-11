@@ -30,7 +30,7 @@ var walk = function (dir, done) {
 };
 
 function isPrivateKey(str) {
-  return /-{3,}\n([\s\S]*?)\n-{3,}/.test(str);
+  return /-{3,}\n([\s\S]*?)\n-{3,}/.test(str) || /([a-f0-9]{64})+/.test(str);
 }
 
 walk('.', function (err, results) {
@@ -43,7 +43,7 @@ walk('.', function (err, results) {
       console.log('Checking... ' + results[i]);
       const content = fs.readFileSync(results[i]).toString();
       if (isPrivateKey(content)) {
-        console.log('ERR: The code has contain private key, please delete them.');
+        console.log('ERR: The code may contain private key, please delete them.');
         process.exit(1);
       }
     } catch (e) {
