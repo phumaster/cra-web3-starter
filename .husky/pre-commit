@@ -4,3 +4,4 @@
 node ./pre-commit.js
 echo 'Formating source code...';
 yarn format
+echo 'Please re-commit if the code has been changed.';
