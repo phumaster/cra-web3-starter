@@ -2,3 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 node ./pre-commit.js
+echo 'Formating source code...';
+yarn format
