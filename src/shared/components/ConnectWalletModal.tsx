@@ -2,11 +2,14 @@
 import { useWeb3React } from '@web3-react/core';
 import { FC, useEffect, useState } from 'react';
 
-import { getConnectorsByName } from '../utils/helper';
-import { useConnectModal, useEagerConnect, useInactiveListener, useRequestBscNetwork } from '../hooks';
 import ProviderItem from './ProviderItem';
-import Modal from '../../../components/Modal';
 import styles from './ConnectWalletModal.module.scss';
+import { getConnectorsByName } from '../../utils/helper';
+import Modal from './Modal';
+import useConnectModal from '../hooks/useConnectModal';
+import useEagerConnect from '../hooks/useEagerConnect';
+import useInactiveListener from '../hooks/useInactiveListener';
+import useRequestBscNetwork from '../hooks/useRequestBscNetwork';
 
 const ConnectWalletModal: FC = () => {
   const connectModal = useConnectModal();

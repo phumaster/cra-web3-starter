@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import NotFoundPage from './modules/errors/NotFoundPage';
 import IndexPage from './modules/home/IndexPage';
+import ConnectWalletModal from './shared/components/ConnectWalletModal';
 import MainLayout from './shared/layouts/main/MainLayout';
-import ConnectWalletModal from './shared/packages/web3/components/ConnectWalletModal';
 
 const App: FC = () => {
   return (

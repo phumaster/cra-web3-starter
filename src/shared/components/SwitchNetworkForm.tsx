@@ -2,7 +2,7 @@ import { FC, useCallback } from 'react';
 
 import SwitchNetworkItem from './SwitchNetworkItem';
 import styles from './SwitchNetworkForm.module.scss';
-import { switchNetwork } from '../packages/web3/utils/helper';
+import { switchNetwork } from '../../utils/helper';
 import AppConfigs from '../../configs';
 
 type Props = {

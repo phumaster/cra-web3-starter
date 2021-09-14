@@ -1,5 +1,5 @@
-import networks from '../../../configs/networks';
-import ChainIds from '../../../configs/chainIds';
+import networks from '../configs/networks';
+import ChainIds from '../configs/chainIds';
 
 const { supportedNetworks } = networks;
 

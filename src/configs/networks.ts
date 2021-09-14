@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import IcBsc from '../assets/icons/ic-bsc.svg';
-import IcEth from '../assets/icons/ic-eth.svg';
-import IcMatic from '../assets/icons/ic-matic.png';
-import IcKcs from '../assets/icons/ic-kcs.png';
+import IcBsc from '../assets/icons/bsc.svg';
+import IcEth from '../assets/icons/eth.svg';
+import IcMatic from '../assets/icons/matic.png';
+import IcKcs from '../assets/icons/kcs.png';
 import ChainIds from './chainIds';
 
 export function orThrow(message: string): any {

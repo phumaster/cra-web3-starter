@@ -6,8 +6,7 @@ import { HashRouter } from 'react-router-dom';
 import './assets/styles/global.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-import Web3Wrapper from './shared/packages/web3/components/Web3Wrapper';
+import Web3Wrapper from './shared/components/Web3Wrapper';
 
 ReactDOM.render(
   <React.StrictMode>

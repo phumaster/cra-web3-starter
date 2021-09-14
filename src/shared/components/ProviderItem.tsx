@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from 'react';
+import AppConfigs from '../../configs';
 
-import AppConfigs from '../../../../configs';
-import Spinner from '../../../components/Spinner';
 import styles from './ProviderItem.module.scss';
+import Spinner from './Spinner';
 
 type Props = {
   name: string;

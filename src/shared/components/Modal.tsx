@@ -2,7 +2,7 @@ import { FC, useCallback, MouseEvent, useEffect } from 'react';
 
 import styles from './Modal.module.scss';
 import Portal from './Portal';
-import IcClose from '../../assets/icons/ic-close-pink.svg';
+import IcClose from '../../assets/icons/close-pink.svg';
 
 type Props = {
   visible: boolean;

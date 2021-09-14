@@ -1,8 +1,8 @@
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
-import ChainIds from '../../../../configs/chainIds';
+import ChainIds from '../configs/chainIds';
 
-import { RPC_URLS, POLLING_INTERVAL } from '../constants';
+import { RPC_URLS, POLLING_INTERVAL } from './constants';
 
 export const injected = new InjectedConnector({
   supportedChainIds: [
