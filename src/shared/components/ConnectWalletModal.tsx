@@ -4,12 +4,13 @@ import { FC, useEffect, useState } from 'react';
 
 import ProviderItem from './ProviderItem';
 import styles from './ConnectWalletModal.module.scss';
-import { getConnectorsByName } from '../../utils/helper';
+import { connectorByName, getChainIdFromUri } from '../../utils/helper';
 import Modal from './Modal';
 import useConnectModal from '../hooks/useConnectModal';
 import useEagerConnect from '../hooks/useEagerConnect';
 import useInactiveListener from '../hooks/useInactiveListener';
 import useRequestBscNetwork from '../hooks/useRequestBscNetwork';
+import { walletconnect } from '../../utils/connectors';
 
 const ConnectWalletModal: FC = () => {
   const connectModal = useConnectModal();
@@ -28,14 +29,15 @@ const ConnectWalletModal: FC = () => {
 
   useInactiveListener(!triedEager || !!activatingConnector);
   useRequestBscNetwork();
-  const connectors = getConnectorsByName();
   const closeModal = () => connectModal.close();
   return (
     <Modal visible={connectModal.visible} onRequestClose={closeModal}>
       <div className={styles.title}>Connect to a wallet</div>
       <div className={styles.items}>
-        {Object.keys(connectors).map((name) => {
-          const currentConnector = connectors[name];
+        {Object.keys(connectorByName).map((name) => {
+          const current = connectorByName[name];
+          const id = getChainIdFromUri();
+          const currentConnector = name === 'WalletConnect' ? { ...current, provider: walletconnect(id) } : current;
           const activating =
             currentConnector.provider === activatingConnector && currentConnector.name === connectorName;
           const connected = currentConnector.provider === connector;

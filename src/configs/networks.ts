@@ -18,6 +18,7 @@ const networks = {
   supportedNetworks: {
     [`${ChainIds.ETH_MAINNET}`]: {
       name: 'Ethereum Mainnet',
+      shortName: 'ETH',
       chainId: ChainIds.ETH_MAINNET,
       icon: IcEth,
       currency: {
@@ -31,6 +32,7 @@ const networks = {
     },
     [`${ChainIds.BSC_MAINNET}`]: {
       name: 'Binance Smart Chain Mainnet',
+      shortName: 'BSC',
       chainId: ChainIds.BSC_MAINNET,
       icon: IcBsc,
       currency: {
@@ -48,6 +50,7 @@ const networks = {
     },
     [`${ChainIds.MATIC_MAINNET}`]: {
       name: 'Matic(Polygon) Mainnet',
+      shortName: 'Matic',
       chainId: ChainIds.MATIC_MAINNET,
       icon: IcMatic,
       currency: {
@@ -61,6 +64,7 @@ const networks = {
     },
     [`${ChainIds.KCC_MAINNET}`]: {
       name: 'KuCoin Community Chain Mainnet',
+      shortName: 'KCC',
       chainId: ChainIds.KCC_MAINNET,
       icon: IcKcs,
       currency: {
@@ -74,6 +78,7 @@ const networks = {
     },
     [`${ChainIds.BSC_TESTNET}`]: {
       name: 'Binance Smart Chain Testnet',
+      shortName: 'BSC-Test',
       chainId: ChainIds.BSC_TESTNET,
       icon: IcBsc,
       currency: {
@@ -91,6 +96,7 @@ const networks = {
     },
     [`${ChainIds.MATIC_TESTNET}`]: {
       name: 'Matic Testnet Mumbai',
+      shortName: 'Matic-Test',
       chainId: ChainIds.MATIC_TESTNET,
       icon: IcMatic,
       currency: {

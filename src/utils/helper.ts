@@ -4,6 +4,8 @@ import Web3 from 'web3';
 import { Contract } from 'web3-eth-contract';
 import { AbiItem } from 'web3-utils';
 import { Web3Provider } from '@ethersproject/providers';
+import query from 'querystring';
+import { formatUnits } from '@ethersproject/units';
 
 import { ConnectorNames, POLLING_INTERVAL } from './constants';
 import { injected, walletconnect } from './connectors';
@@ -28,15 +30,15 @@ type TChainInfo = {
   blockExplorerUrls: string[];
 };
 
-export function getRpcUrl(): string {
-  return supportedNetworks[`${ChainIds.BSC_MAINNET}`].rpcUrls[
-    Math.floor(Math.random() * supportedNetworks[`${ChainIds.BSC_MAINNET}`].rpcUrls.length)
+export function getRpcUrl(chain?: string): string {
+  return supportedNetworks[`${chain || ChainIds.BSC_MAINNET}`].rpcUrls[
+    Math.floor(Math.random() * supportedNetworks[`${chain || ChainIds.BSC_MAINNET}`].rpcUrls.length)
   ];
 }
 
-export function getTestnetRpcUrl(): string {
-  return supportedNetworks[`${ChainIds.BSC_TESTNET}`].rpcUrls[
-    Math.floor(Math.random() * supportedNetworks[`${ChainIds.BSC_TESTNET}`].rpcUrls.length)
+export function getTestnetRpcUrl(chain?: string): string {
+  return supportedNetworks[`${chain || ChainIds.BSC_TESTNET}`].rpcUrls[
+    Math.floor(Math.random() * supportedNetworks[`${chain || ChainIds.BSC_TESTNET}`].rpcUrls.length)
   ];
 }
 
@@ -53,30 +55,28 @@ type TConnector = {
   icon: string;
 };
 
-export function getConnectorsByName(): { [key: string]: TConnector } {
-  return {
-    [ConnectorNames.Injected]: {
-      name: 'Metamask',
-      icon: IcMetamask,
-      provider: injected,
-    },
-    [ConnectorNames.TrustWallet]: {
-      name: 'TrustWallet',
-      icon: IcTrustWallet,
-      provider: injected,
-    },
-    [ConnectorNames.WalletConnect]: {
-      name: 'WalletConnect',
-      icon: IcWalletConnect,
-      provider: walletconnect,
-    },
-    [ConnectorNames.SafePad]: {
-      name: 'SafePad Wallet',
-      icon: IcSafePad,
-      provider: injected,
-    },
-  };
-}
+export const connectorByName: { [key: string]: TConnector } = {
+  [ConnectorNames.Injected]: {
+    name: 'Metamask',
+    icon: IcMetamask,
+    provider: injected,
+  },
+  [ConnectorNames.TrustWallet]: {
+    name: 'TrustWallet',
+    icon: IcTrustWallet,
+    provider: injected,
+  },
+  [ConnectorNames.WalletConnect]: {
+    name: 'WalletConnect',
+    icon: IcWalletConnect,
+    provider: walletconnect(),
+  },
+  [ConnectorNames.SafePad]: {
+    name: 'SafePad Wallet',
+    icon: IcSafePad,
+    provider: injected,
+  },
+};
 
 export async function requestNetwork(options: TChainInfo): Promise<boolean> {
   const provider = (window as WindowChain).ethereum;
@@ -155,8 +155,72 @@ const httpProvider = new Web3.providers.HttpProvider(
 );
 export const web3NoAccount = new Web3(httpProvider);
 
+export function chainToId(chain: string): number | undefined {
+  return {
+    BSC: ChainIds.BSC_MAINNET,
+    ETH: ChainIds.ETH_MAINNET,
+    'BSC-Test': ChainIds.BSC_TESTNET,
+    Matic: ChainIds.MATIC_MAINNET,
+    'Matic-Test': ChainIds.MATIC_TESTNET,
+    KCC: ChainIds.KCC_MAINNET,
+  }[chain];
+}
+
+export function idToChainName(chainId: number): string | undefined {
+  return {
+    [ChainIds.BSC_MAINNET]: 'BSC',
+    [ChainIds.ETH_MAINNET]: 'ETH',
+    [ChainIds.BSC_TESTNET]: 'BSC-Test',
+    [ChainIds.MATIC_MAINNET]: 'Matic',
+    [ChainIds.MATIC_TESTNET]: 'Matic-Test',
+    [ChainIds.KCC_MAINNET]: 'KCC',
+  }[chainId];
+}
+
+function getRpcUrlByChain(chain?: string) {
+  const rpc = getRpcUrl(chain);
+  return rpc || (process.env.NODE_ENV === 'production' ? getRpcUrl() : getTestnetRpcUrl());
+}
+
+function getWeb3FromUri() {
+  const [, segment] = window.location.href.split('?');
+  if (segment) {
+    const qs = query.parse(segment);
+    if (qs.chain) {
+      const id = chainToId(qs.chain as string);
+      const rpc = getRpcUrlByChain(id?.toString());
+      const provider = new Web3.providers.HttpProvider(rpc, {
+        timeout: 10000,
+      });
+      return new Web3(provider);
+    }
+  }
+  return undefined;
+}
+
+export function getChainIdFromUri(): number | undefined {
+  const [, segment] = window.location.href.split('?');
+  if (segment) {
+    const qs = query.parse(segment);
+    if (qs.chain) {
+      const id = chainToId(qs.chain as string);
+      return id;
+    }
+  }
+  return undefined;
+}
+
+export function getChainByUri(): string | string[] | undefined {
+  const [, segment] = window.location.href.split('?');
+  if (segment) {
+    const qs = query.parse(segment);
+    return qs.chain;
+  }
+  return undefined;
+}
+
 export function getWeb3NoAccount(): Web3 {
-  return web3NoAccount;
+  return getWeb3FromUri() || web3NoAccount;
 }
 
 export function getContract(abi: AbiItem | AbiItem[], address: string, web3?: Web3): Contract {
@@ -166,4 +230,34 @@ export function getContract(abi: AbiItem | AbiItem[], address: string, web3?: We
 
 export function orThrow(message: string): Error {
   throw new Error(message);
+}
+
+export function abbreviateNumber(num: number): string {
+  if (num >= 10000000000000) {
+    return (num / 1000000000000).toFixed(0).replace(/\.0$/, '') + 'T';
+  }
+  if (num >= 1000000000) {
+    return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+  }
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  }
+  if (num >= 1000) {
+    return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+  }
+  return num.toFixed(0);
+}
+
+export function withoutZeroEnd(amount: string): string {
+  return amount.endsWith('.0') ? amount.replace('.0', '') : amount;
+}
+
+export function numberFormat(amount: string): string {
+  return amount.replace(/(.)(?=(\d{3})+$)/g, '$1,');
+}
+
+export function formatWithDecimals(amount: string, decimals: number): string {
+  const formated = formatUnits(amount, decimals);
+  const withoutZero = withoutZeroEnd(formated);
+  return numberFormat(withoutZero);
 }
