@@ -1,6 +1,6 @@
 import { useWeb3React } from '@web3-react/core';
 import { useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import Web3 from 'web3';
 
 import { getWeb3NoAccount } from '../../utils/helper';
@@ -9,7 +9,7 @@ import web3State from '../states/web3';
 function useWeb3Effect(): void {
   const { library } = useWeb3React();
   const refEth = useRef(library);
-  const [, setweb3] = useRecoilState(web3State);
+  const setweb3 = useSetRecoilState(web3State);
 
   useEffect(() => {
     if (library !== refEth.current) {
