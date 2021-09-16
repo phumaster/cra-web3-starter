@@ -182,7 +182,7 @@ function getRpcUrlByChain(chain?: string) {
   return rpc || (process.env.NODE_ENV === 'production' ? getRpcUrl() : getTestnetRpcUrl());
 }
 
-function getWeb3FromUri() {
+export function getWeb3FromUri(): Web3 | undefined {
   const [, segment] = window.location.href.split('?');
   if (segment) {
     const qs = query.parse(segment);
