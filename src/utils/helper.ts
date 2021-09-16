@@ -148,7 +148,7 @@ export async function requestBscNetwork(): Promise<boolean> {
 }
 
 const httpProvider = new Web3.providers.HttpProvider(
-  process.env.PHASE === 'production' ? getRpcUrl() : getTestnetRpcUrl(),
+  process.env.NODE_ENV === 'production' ? getRpcUrl() : getTestnetRpcUrl(),
   {
     timeout: 10000,
   },
