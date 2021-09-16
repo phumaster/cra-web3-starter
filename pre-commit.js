@@ -33,7 +33,7 @@ function isPrivateKey(str) {
   return /-{3,}\n([\s\S]*?)\n-{3,}/.test(str) || /([a-f0-9]{64})+/.test(str);
 }
 
-walk('.', function (err, results) {
+walk('./src', function (err, results) {
   if (err) {
     console.log('Error when checking files');
     process.exit(1);
