@@ -92,9 +92,10 @@
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
+    "start": "cross-env SASS_PATH=node_modules:src/shared/styles node scripts/start.js",
+    "dev": "cross-env SASS_PATH=./node_modules;./src/shared/styles node scripts/start.js",
+    "build": "cross-env SASS_PATH=node_modules:src/shared/styles node scripts/build.js",
+    "test": "cross-env SASS_PATH=node_modules:src/shared/styles node scripts/test.js",
     "format": "./node_modules/.bin/prettier --write src/**/*.{ts,tsx,json,scss}",
     "lint": "eslint src/**/*.{js,ts,tsx} --quiet --fix",
     "postinstall": "husky install"
@@ -181,6 +182,7 @@
   "devDependencies": {
     "@types/classnames": "^2.3.1",
     "@types/react-router-dom": "^5.1.8",
+    "cross-env": "^7.0.3",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0"
   }

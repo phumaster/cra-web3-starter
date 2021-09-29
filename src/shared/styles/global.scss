@@ -1,4 +1,9 @@
+@import "common";
 @import './nomarlize.scss';
+
+:root {
+  --primary-color: #{$primary_color};
+}
 
 body {
   margin: 0;

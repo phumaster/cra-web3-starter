@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { RecoilRoot } from 'recoil';
 import { HashRouter } from 'react-router-dom';
 
-import './assets/styles/global.scss';
+import './shared/styles/global.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Web3Wrapper from './shared/components/Web3Wrapper';

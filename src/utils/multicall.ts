@@ -3,10 +3,9 @@ import Web3 from 'web3';
 import { Interface } from '@ethersproject/abi';
 import { AbiItem } from 'web3-utils';
 
-import ChainIds from '../configs/chainIds';
+import ChainIds from '../configs/chain-ids';
 import { getContract, orThrow } from './helper';
 import AppConfigs from '../configs';
-import multicallAbi from '../abi/multicall.json';
 
 type Call = {
   address: string; // Address of the contract
@@ -20,26 +19,15 @@ type MulticallOptions = {
   requireSuccess?: boolean;
 };
 
-function getMulticallContract(chainId: number, web3: any): any {
-  switch (chainId) {
-    case ChainIds.BSC_TESTNET:
-      return getContract(multicallAbi as unknown as AbiItem, AppConfigs.contract.multicall.BSC_TESTNET, web3);
-    case ChainIds.MATIC_TESTNET:
-      return getContract(multicallAbi as unknown as AbiItem, AppConfigs.contract.multicall.MATIC_TESTNET, web3);
-    case ChainIds.MATIC_MAINNET:
-      return getContract(multicallAbi as unknown as AbiItem, AppConfigs.contract.multicall.MATIC, web3);
-    case ChainIds.KCC_TESTNET:
-      return getContract(multicallAbi as unknown as AbiItem, AppConfigs.contract.multicall.KCC_TESTNET, web3);
-    case ChainIds.KCC_MAINNET:
-      return getContract(multicallAbi as unknown as AbiItem, AppConfigs.contract.multicall.KCC, web3);
-    case ChainIds.ETH_MAINNET:
-      return getContract(multicallAbi as unknown as AbiItem, AppConfigs.contract.multicall.ETH, web3);
-    default:
-      return getContract(multicallAbi as unknown as AbiItem, AppConfigs.contract.multicall.BSC, web3);
-  }
+function getMulticallContract(chainId: ChainIds, web3: any): any {
+  return getContract(
+    AppConfigs.contract.multicall.ABI as unknown as AbiItem,
+    AppConfigs.contract.multicall.addresses[chainId],
+    web3,
+  );
 }
 
-async function multicall(abi: any[], calls: Call[], options: MulticallOptions = {}, chainId?: number): Promise<any> {
+async function multicall(abi: any[], calls: Call[], options: MulticallOptions = {}, chainId?: ChainIds): Promise<any> {
   try {
     const contract = getMulticallContract(chainId || ChainIds.BSC_TESTNET, options.web3);
     const itf = new Interface(abi);

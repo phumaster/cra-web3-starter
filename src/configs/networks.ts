@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import IcBsc from '../assets/icons/bsc.svg';
 import IcEth from '../assets/icons/eth.svg';
-import IcMatic from '../assets/icons/matic.png';
-import IcKcs from '../assets/icons/kcs.png';
-import ChainIds from './chainIds';
+import ChainIds from './chain-ids';
 
 export function orThrow(message: string): any {
   throw new Error(message);
@@ -16,7 +14,7 @@ const networks = {
     'https://rinkeby.infura.io/v3/84842078b09946638c03157f83405213',
   ],
   supportedNetworks: {
-    [`${ChainIds.ETH_MAINNET}`]: {
+    [ChainIds.ETH_MAINNET]: {
       name: 'Ethereum Mainnet',
       shortName: 'ETH',
       chainId: ChainIds.ETH_MAINNET,
@@ -30,7 +28,7 @@ const networks = {
       blockExplorerUrls: ['https://etherscan.io'],
       type: 'mainnet',
     },
-    [`${ChainIds.BSC_MAINNET}`]: {
+    [ChainIds.BSC_MAINNET]: {
       name: 'Binance Smart Chain Mainnet',
       shortName: 'BSC',
       chainId: ChainIds.BSC_MAINNET,
@@ -48,35 +46,7 @@ const networks = {
       blockExplorerUrls: ['https://bscscan.com'],
       type: 'mainnet',
     },
-    [`${ChainIds.MATIC_MAINNET}`]: {
-      name: 'Matic(Polygon) Mainnet',
-      shortName: 'Matic',
-      chainId: ChainIds.MATIC_MAINNET,
-      icon: IcMatic,
-      currency: {
-        name: 'MATIC',
-        symbol: 'MATIC',
-        decimals: 18,
-      },
-      rpcUrls: ['https://rpc-mainnet.maticvigil.com'],
-      blockExplorerUrls: ['https://polygonscan.com/'],
-      type: 'mainnet',
-    },
-    [`${ChainIds.KCC_MAINNET}`]: {
-      name: 'KuCoin Community Chain Mainnet',
-      shortName: 'KCC',
-      chainId: ChainIds.KCC_MAINNET,
-      icon: IcKcs,
-      currency: {
-        name: 'KuCoin Token',
-        symbol: 'KCS',
-        decimals: 18,
-      },
-      rpcUrls: ['https://rpc-mainnet.kcc.network', 'wss://rpc-ws-mainnet.kcc.network'],
-      blockExplorerUrls: ['https://explorer.kcc.io/en'],
-      type: 'mainnet',
-    },
-    [`${ChainIds.BSC_TESTNET}`]: {
+    [ChainIds.BSC_TESTNET]: {
       name: 'Binance Smart Chain Testnet',
       shortName: 'BSC-Test',
       chainId: ChainIds.BSC_TESTNET,
@@ -92,20 +62,6 @@ const networks = {
         'https://data-seed-prebsc-1-s2.binance.org:8545',
       ],
       blockExplorerUrls: ['https://testnet.bscscan.com'],
-      type: 'testnet',
-    },
-    [`${ChainIds.MATIC_TESTNET}`]: {
-      name: 'Matic Testnet Mumbai',
-      shortName: 'Matic-Test',
-      chainId: ChainIds.MATIC_TESTNET,
-      icon: IcMatic,
-      currency: {
-        name: 'MATIC',
-        symbol: 'MATIC',
-        decimals: 18,
-      },
-      rpcUrls: ['https://rpc-mumbai.matic.today'],
-      blockExplorerUrls: ['https://explorer-mumbai.maticvigil.com/'],
       type: 'testnet',
     },
   },

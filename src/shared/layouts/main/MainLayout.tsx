@@ -4,10 +4,10 @@ import PageHeader from './PageHeader';
 const MainLayout: React.FC = ({ children }) => {
   useWeb3Effect();
   return (
-    <>
+    <div id="light-theme">
       <PageHeader />
       <div>{children}</div>
-    </>
+    </div>
   );
 };
 

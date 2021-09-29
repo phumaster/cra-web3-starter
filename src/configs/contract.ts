@@ -1,12 +1,14 @@
+import multicallAbi from '../abi/multicall.json';
+import ChainIds from './chain-ids';
+
 const contract = {
   multicall: {
-    ETH: '0x.....',
-    BSC: '0x.....',
-    BSC_TESTNET: '0x.....',
-    MATIC: '0x.....',
-    MATIC_TESTNET: '0x.....',
-    KCC: '0x.....',
-    KCC_TESTNET: '0x.....',
+    ABI: multicallAbi,
+    addresses: {
+      [ChainIds.ETH_MAINNET]: '0x.....',
+      [ChainIds.BSC_MAINNET]: '0x.....',
+      [ChainIds.BSC_TESTNET]: '0x.....',
+    },
   },
 };
 

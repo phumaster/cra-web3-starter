@@ -2,10 +2,11 @@ import { useWeb3React } from '@web3-react/core';
 import { useRecoilState } from 'recoil';
 
 import AppConfigs from '../../configs';
+import ChainIds from '../../configs/chain-ids';
 import { getChainIdFromUri } from '../../utils/helper';
 import chainIdState from '../states/chainId';
 
-function useChainId(): number {
+function useChainId(): ChainIds {
   const { chainId } = useWeb3React();
   const [chain] = useRecoilState(chainIdState);
   const chainFromUri = getChainIdFromUri();
