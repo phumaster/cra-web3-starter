@@ -249,11 +249,22 @@ export function withoutZeroEnd(amount: string): string {
 }
 
 export function numberFormat(amount: string): string {
-  return amount.replace(/(.)(?=(\d{3})+$)/g, '$1,');
+  const [first, ...rest] = amount.split('.');
+  return amount.split('.').length > 1
+    ? `${(first ?? '').replace(/(.)(?=(\d{3})+$)/g, '$1,')}.${rest.join().substring(0, 4)}`
+    : amount.replace(/(.)(?=(\d{3})+$)/g, '$1,');
 }
 
 export function formatWithDecimals(amount: string, decimals: number): string {
   const formated = formatUnits(amount, decimals);
   const withoutZero = withoutZeroEnd(formated);
   return numberFormat(withoutZero);
+}
+
+export function getExplorerAddressLink(domain: string, address: string): string {
+  return `${domain}/address/${address}`;
+}
+
+export function getExplorerTokenLink(domain: string, address: string): string {
+  return `${domain}/token/${address}`;
 }
