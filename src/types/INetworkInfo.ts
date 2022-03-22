@@ -1,4 +1,5 @@
 import ChainIds from '@/configs/chain-ids';
+
 import IToken from './IToken';
 
 interface INetworkInfo {

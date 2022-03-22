@@ -1,5 +1,5 @@
-import networks from '../configs/networks';
-import ChainIds from '../configs/chain-ids';
+import networks from '@/configs/networks';
+import ChainIds from '@/configs/chain-ids';
 
 const { supportedNetworks } = networks;
 
@@ -15,4 +15,5 @@ export enum ConnectorNames {
   TrustWallet = 'TrustWallet',
   SafePad = 'SafePad',
   WalletConnect = 'WalletConnect',
+  Coinbase = 'Coinbase',
 }

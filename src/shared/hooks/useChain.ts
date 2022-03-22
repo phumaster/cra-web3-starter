@@ -1,6 +1,7 @@
-import useChainId from './useChainId';
-import AppConfigs from '../../configs';
+import AppConfigs from '@/configs';
 import INetworkInfo from '@/types/INetworkInfo';
+
+import useChainId from './useChainId';
 
 function useChain(): INetworkInfo {
   const chainId = useChainId();

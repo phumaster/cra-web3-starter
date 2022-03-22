@@ -4,13 +4,12 @@ import { FC, useEffect, useState } from 'react';
 
 import ProviderItem from './ProviderItem';
 import styles from './ConnectWalletModal.module.scss';
-import { connectorByName, getChainIdFromUri } from '../../utils/helper';
+import { connectorByName, getChainIdFromUri, getProviderByName } from '@/utils/web3';
 import Modal from './Modal';
 import useConnectModal from '../hooks/useConnectModal';
 import useEagerConnect from '../hooks/useEagerConnect';
 import useInactiveListener from '../hooks/useInactiveListener';
 import useRequestBscNetwork from '../hooks/useRequestBscNetwork';
-import { walletconnect } from '../../utils/connectors';
 
 const ConnectWalletModal: FC = () => {
   const connectModal = useConnectModal();
@@ -37,7 +36,8 @@ const ConnectWalletModal: FC = () => {
         {Object.keys(connectorByName).map((name) => {
           const current = connectorByName[name];
           const id = getChainIdFromUri();
-          const currentConnector = name === 'WalletConnect' ? { ...current, provider: walletconnect(id) } : current;
+          const desiredProvider = getProviderByName(name, id);
+          const currentConnector = desiredProvider ? { ...current, provider: desiredProvider } : current;
           const activating =
             currentConnector.provider === activatingConnector && currentConnector.name === connectorName;
           const connected = currentConnector.provider === connector;

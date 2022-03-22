@@ -1,6 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo 'Formating source code...';
-yarn format
-echo 'Please re-commit if the code has been changed.';
+echo 'pre-commit hook';

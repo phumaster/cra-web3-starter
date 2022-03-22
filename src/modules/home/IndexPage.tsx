@@ -1,8 +1,7 @@
 import { FC } from 'react';
 
-import useAccountBalance from '../../shared/hooks/useAccountBalance';
+import useAccountBalance from '@/shared/hooks/useAccountBalance';
 
-// styles
 const pageStyles = {
   color: '#232129',
   padding: 96,
@@ -10,8 +9,8 @@ const pageStyles = {
 };
 
 const IndexPage: FC = () => {
-  const balance = useAccountBalance();
-  return <main style={pageStyles}>{balance}</main>;
+  const { value } = useAccountBalance();
+  return <main style={pageStyles}>{value?.toString()}</main>;
 };
 
 export default IndexPage;

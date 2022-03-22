@@ -1,36 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useWeb3React } from '@web3-react/core';
-import { useEffect, useState } from 'react';
+import { useAsync } from 'react-use';
+import { AsyncState } from 'react-use/lib/useAsyncFn';
+import { BigNumber } from '@ethersproject/bignumber';
+
 import useChainId from './useChainId';
 
-export function useAccountBalance(): string | undefined {
+export function useAccountBalance(): AsyncState<undefined | BigNumber> {
   const { account, library } = useWeb3React();
   const chainId = useChainId();
-  const [balance, setBalance] = useState<string>();
-  useEffect((): any => {
-    if (!!account && !!library) {
-      let stale = false;
-      library
-        .getBalance(account)
-        .then((balance: any) => {
-          if (!stale) {
-            setBalance(balance);
-          }
-        })
-        .catch(() => {
-          if (!stale) {
-            setBalance(undefined);
-          }
-        });
 
-      return () => {
-        stale = true;
-        setBalance(undefined);
-      };
-    }
+  const state = useAsync(async () => {
+    if (!account || !library) return undefined;
+    const balance = await library.getBalance(account);
+    return balance;
   }, [account, library, chainId]);
 
-  return balance ? (balance || '').toString() : balance;
+  return state;
 }
 
 export default useAccountBalance;

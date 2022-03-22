@@ -4,7 +4,8 @@ import { Interface } from '@ethersproject/abi';
 import { AbiItem } from 'web3-utils';
 
 import ChainIds from '../configs/chain-ids';
-import { getContract, orThrow } from './helper';
+import { getContract } from './web3';
+import { orThrow } from './helper';
 import AppConfigs from '../configs';
 
 type Call = {

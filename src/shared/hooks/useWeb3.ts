@@ -1,7 +1,8 @@
 import { useRecoilState } from 'recoil';
 import Web3 from 'web3';
 
-import { getWeb3FromUri, web3NoAccount } from '../../utils/helper';
+import { getWeb3FromUri, web3NoAccount } from '@/utils/web3';
+
 import web3State from '../states/web3';
 
 function useWeb3(): Web3 {

@@ -1,7 +1,7 @@
 interface WindowChain {
   ethereum?: {
     isMetaMask?: true;
-    request?: (...args: any[]) => void;
+    request?: (...args: unknown[]) => void;
   };
 }
 

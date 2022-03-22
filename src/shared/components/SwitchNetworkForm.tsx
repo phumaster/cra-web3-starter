@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useCallback } from 'react';
 
-import SwitchNetworkItem from './SwitchNetworkItem';
-import styles from './SwitchNetworkForm.module.scss';
-import { switchNetwork } from '../../utils/helper';
-import AppConfigs from '../../configs';
 import { useHistory } from 'react-router';
 import { useWeb3React } from '@web3-react/core';
+
+import { switchNetwork } from '@/utils/web3';
+import AppConfigs from '@/configs';
+
+import SwitchNetworkItem from './SwitchNetworkItem';
+
+import styles from './SwitchNetworkForm.module.scss';
 
 type Props = {
   onClose?(): void;
