@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import useAccountBalance from '@/shared/hooks/useAccountBalance';
 
@@ -10,7 +11,15 @@ const pageStyles = {
 
 const IndexPage: FC = () => {
   const { value } = useAccountBalance();
-  return <main style={pageStyles}>{value?.toString()}</main>;
+  const { t, i18n } = useTranslation();
+  return (
+    <main style={pageStyles}>
+      <h1>{t('Welcome to React')}</h1>
+      <div>{value?.toString()}</div>
+      <button onClick={() => i18n.changeLanguage('de')}>DE</button>
+      <button onClick={() => i18n.changeLanguage('en')}>EN</button>
+    </main>
+  );
 };
 
 export default IndexPage;
