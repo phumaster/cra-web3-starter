@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Web3 from 'web3';
 import { Interface } from '@ethersproject/abi';
-import { AbiItem } from 'web3-utils';
 
 import ChainIds from '../configs/chain-ids';
 import { getContract } from './web3';
@@ -22,7 +21,44 @@ type MulticallOptions = {
 
 function getMulticallContract(chainId: ChainIds, web3: any): any {
   return getContract(
-    AppConfigs.contract.multicall.ABI as unknown as AbiItem,
+    [
+      {
+        inputs: [
+          {
+            components: [
+              {
+                internalType: 'address',
+                name: 'target',
+                type: 'address',
+              },
+              {
+                internalType: 'bytes',
+                name: 'callData',
+                type: 'bytes',
+              },
+            ],
+            internalType: 'struct Multicall.Call[]',
+            name: 'calls',
+            type: 'tuple[]',
+          },
+        ],
+        name: 'aggregate',
+        outputs: [
+          {
+            internalType: 'uint256',
+            name: 'blockNumber',
+            type: 'uint256',
+          },
+          {
+            internalType: 'bytes[]',
+            name: 'returnData',
+            type: 'bytes[]',
+          },
+        ],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+    ],
     AppConfigs.contract.multicall.addresses[chainId],
     web3,
   );
