@@ -32,7 +32,7 @@ const ConnectWalletModal: FC = () => {
   return (
     <Modal visible={connectModal.visible} onRequestClose={closeModal}>
       <div className={styles.title}>Connect to a wallet</div>
-      <div className={styles.items}>
+      <div>
         {Object.keys(connectorByName).map((name) => {
           const current = connectorByName[name];
           const id = getChainIdFromUri();
@@ -59,6 +59,7 @@ const ConnectWalletModal: FC = () => {
           );
         })}
       </div>
+      <p className={styles.legend}>Learn how to connect?</p>
     </Modal>
   );
 };

@@ -2,10 +2,10 @@
 import Web3 from 'web3';
 import { Interface } from '@ethersproject/abi';
 
-import ChainIds from '../configs/chain-ids';
+import ChainIds from '../configs/chain';
 import { getContract } from './web3';
 import { orThrow } from './helper';
-import AppConfigs from '../configs';
+import chainInfo from './chain-info';
 
 type Call = {
   address: string; // Address of the contract
@@ -59,7 +59,7 @@ function getMulticallContract(chainId: ChainIds, web3: any): any {
         type: 'function',
       },
     ],
-    AppConfigs.contract.multicall.addresses[chainId],
+    chainInfo.multicallAddresses[chainId],
     web3,
   );
 }

@@ -1,8 +1,8 @@
-import ChainIds from '@/configs/chain-ids';
+import ChainIds from '@/configs/chain';
 
 import IToken from './IToken';
 
-interface INetworkInfo {
+interface IChainInfo {
   name: string;
   shortName: string;
   chainId: ChainIds;
@@ -11,6 +11,9 @@ interface INetworkInfo {
   rpcUrls: string[];
   blockExplorerUrls: string[];
   type: string;
+  contracts: {
+    multicall: string;
+  };
 }
 
-export default INetworkInfo;
+export default IChainInfo;

@@ -4,7 +4,8 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 
 import AppConfigs from '../configs';
-import ChainIds from '../configs/chain-ids';
+import ChainIds from '../configs/chain';
+import chainInfo from './chain-info';
 
 import { POLLING_INTERVAL } from './constants';
 
@@ -14,7 +15,7 @@ export const injected = new InjectedConnector({
 
 export function coinbaseWallet(chainId?: ChainIds) {
   return new WalletLinkConnector({
-    url: AppConfigs.networks.supportedNetworks[chainId || ChainIds.BSC_MAINNET].rpcUrls[0],
+    url: chainInfo.chains[chainId || ChainIds.BSC_MAINNET].rpcUrls[0],
     appName: AppConfigs.info.APP_NAME,
     appLogoUrl: AppConfigs.info.APP_LOGO_URL,
     supportedChainIds: [chainId || ChainIds.BSC_MAINNET],
@@ -24,8 +25,7 @@ export function coinbaseWallet(chainId?: ChainIds) {
 export function walletconnect(chainId?: ChainIds) {
   return new WalletConnectConnector({
     rpc: {
-      [chainId || ChainIds.BSC_MAINNET]:
-        AppConfigs.networks.supportedNetworks[chainId || ChainIds.BSC_MAINNET].rpcUrls[0],
+      [chainId || ChainIds.BSC_MAINNET]: chainInfo.chains[chainId || ChainIds.BSC_MAINNET].rpcUrls[0],
     },
     qrcode: true,
     pollingInterval: POLLING_INTERVAL,

@@ -1,22 +1,27 @@
 .item {
-  padding: 8px 12px;
-  font-weight: 600;
+  padding: 1rem;
+  margin-bottom: 0.125rem;
   cursor: pointer;
   transition: all 250ms ease;
   text-align: center;
+  display: flex;
+  align-items: center;
+  background-color: #dde1e6;
 
   .title {
-    font-size: 13px;
-    color: #444;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #000;
+    margin-left: 1rem;
   }
 
-  &:hover .title {
-    color: var(--primary-color);
+  &:hover {
+    background-color: #a9adb1;
   }
 
   .icon {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
   }
 }
 

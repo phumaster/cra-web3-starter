@@ -1,11 +1,11 @@
-import AppConfigs from '@/configs';
-import INetworkInfo from '@/types/INetworkInfo';
+import IChainInfo from '@/types/IChainInfo';
+import chainInfo from '@/utils/chain-info';
 
 import useChainId from './useChainId';
 
-function useChain(): INetworkInfo {
+function useChain(): IChainInfo {
   const chainId = useChainId();
-  return AppConfigs.networks.supportedNetworks[chainId];
+  return chainInfo.chains[chainId];
 }
 
 export default useChain;

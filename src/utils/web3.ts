@@ -13,33 +13,22 @@ import IcWalletConnect from '../assets/icons/walletconnect.svg';
 import IcSafePad from '../assets/icons/safepad.svg';
 import IcTrustWallet from '../assets/icons/trustwallet.svg';
 import IcCoinbase from '../assets/icons/coinbase.png';
-import AppConfigs from '../configs';
 import IcMetamask from '../assets/icons/metamask';
-import ChainIds from '../configs/chain-ids';
+import ChainIds from '../configs/chain';
+import chainInfo from './chain-info';
+import IChainInfo from '@/types/IChainInfo';
 
-const { supportedNetworks } = AppConfigs.networks;
-
-type TChainInfo = {
-  chainId: number;
-  name: string;
-  currency: {
-    name: string;
-    symbol: string;
-    decimals: number;
-  };
-  rpcUrls: string[];
-  blockExplorerUrls: string[];
-};
+type TChainInfo = Pick<IChainInfo, 'chainId' | 'name' | 'currency' | 'rpcUrls' | 'blockExplorerUrls'>;
 
 export function getRpcUrl(chain?: ChainIds): string {
-  return supportedNetworks[chain || ChainIds.BSC_MAINNET].rpcUrls[
-    Math.floor(Math.random() * supportedNetworks[chain || ChainIds.BSC_MAINNET].rpcUrls.length)
+  return chainInfo.chains[chain || ChainIds.BSC_MAINNET].rpcUrls[
+    Math.floor(Math.random() * chainInfo.chains[chain || ChainIds.BSC_MAINNET].rpcUrls.length)
   ];
 }
 
 export function getTestnetRpcUrl(chain?: ChainIds): string {
-  return supportedNetworks[chain || ChainIds.BSC_TESTNET].rpcUrls[
-    Math.floor(Math.random() * supportedNetworks[chain || ChainIds.BSC_TESTNET].rpcUrls.length)
+  return chainInfo.chains[chain || ChainIds.BSC_TESTNET].rpcUrls[
+    Math.floor(Math.random() * chainInfo.chains[chain || ChainIds.BSC_TESTNET].rpcUrls.length)
   ];
 }
 
@@ -62,11 +51,6 @@ export const connectorByName: { [key: string]: TConnector } = {
     icon: IcMetamask,
     provider: injected,
   },
-  [ConnectorNames.TrustWallet]: {
-    name: 'TrustWallet',
-    icon: IcTrustWallet,
-    provider: injected,
-  },
   [ConnectorNames.WalletConnect]: {
     name: 'WalletConnect',
     icon: IcWalletConnect,
@@ -77,8 +61,13 @@ export const connectorByName: { [key: string]: TConnector } = {
     icon: IcCoinbase,
     provider: coinbaseWallet(),
   },
+  [ConnectorNames.TrustWallet]: {
+    name: 'TrustWallet',
+    icon: IcTrustWallet,
+    provider: injected,
+  },
   [ConnectorNames.SafePad]: {
-    name: 'SafePad Wallet',
+    name: 'SafePad',
     icon: IcSafePad,
     provider: injected,
   },
@@ -153,8 +142,8 @@ export async function requestBscNetwork(): Promise<boolean> {
       symbol: 'bnb',
       decimals: 18,
     },
-    rpcUrls: supportedNetworks[ChainIds.BSC_MAINNET].rpcUrls,
-    blockExplorerUrls: supportedNetworks[ChainIds.BSC_MAINNET].blockExplorerUrls,
+    rpcUrls: chainInfo.chains[ChainIds.BSC_MAINNET].rpcUrls,
+    blockExplorerUrls: chainInfo.chains[ChainIds.BSC_MAINNET].blockExplorerUrls,
   });
   return requested;
 }

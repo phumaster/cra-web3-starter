@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 import { useWeb3React } from '@web3-react/core';
 
 import { switchNetwork } from '@/utils/web3';
-import AppConfigs from '@/configs';
+import chainInfo from '@/utils/chain-info';
 
 import SwitchNetworkItem from './SwitchNetworkItem';
 
@@ -14,9 +14,6 @@ import styles from './SwitchNetworkForm.module.scss';
 type Props = {
   onClose?(): void;
 };
-
-const mainnet = Object.values(AppConfigs.networks.supportedNetworks).filter(({ type }) => type === 'mainnet');
-const testnet = Object.values(AppConfigs.networks.supportedNetworks).filter(({ type }) => type === 'testnet');
 
 const SwitchNetworkForm: FC<Props> = ({ onClose }) => {
   const history = useHistory();
@@ -59,13 +56,13 @@ const SwitchNetworkForm: FC<Props> = ({ onClose }) => {
     <>
       <div className={styles.title}>Switch network</div>
       <div className={styles.chains}>
-        {mainnet.map((chain) => (
+        {chainInfo.mainnet.map((chain) => (
           <SwitchNetworkItem key={chain.chainId} name={chain.name} icon={chain.icon} onClick={handleClickItem(chain)} />
         ))}
       </div>
       <div className={styles.divider} />
       <div className={styles.chains}>
-        {testnet.map((chain) => (
+        {chainInfo.testnet.map((chain) => (
           <SwitchNetworkItem key={chain.chainId} name={chain.name} icon={chain.icon} onClick={handleClickItem(chain)} />
         ))}
       </div>
