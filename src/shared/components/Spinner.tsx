@@ -1,13 +1,13 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import cls from 'classnames';
 
 import styles from './Spinner.module.scss';
 
-type Props = {
+type Props = PropsWithChildren<{
   spinning?: boolean;
   className?: string;
   overlayClassName?: string;
-};
+}>;
 
 const Spinner: FC<Props> = ({ spinning = true, className, overlayClassName, children }) => (
   <div className={cls(styles.root, className)}>

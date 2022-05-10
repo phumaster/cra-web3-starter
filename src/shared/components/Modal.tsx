@@ -1,14 +1,14 @@
-import { FC, useCallback, MouseEvent, useEffect } from 'react';
+import { FC, useCallback, MouseEvent, useEffect, PropsWithChildren } from 'react';
 
 import styles from './Modal.module.scss';
 import Portal from './Portal';
 import IcClose from '../../assets/icons/close-pink.svg';
 
-type Props = {
+type Props = PropsWithChildren<{
   visible: boolean;
   closeable?: boolean;
   onRequestClose(): void;
-};
+}>;
 
 const Modal: FC<Props> = ({ visible, closeable = true, onRequestClose, children }) => {
   const handleClickOverlay = useCallback(

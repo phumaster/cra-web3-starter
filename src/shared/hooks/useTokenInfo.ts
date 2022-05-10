@@ -1,9 +1,9 @@
 import { useAsync } from 'react-use';
 import { AsyncState } from 'react-use/lib/useAsyncFn';
 
-import IToken from '@/types/IToken';
-import multicall from '@/utils/multicall';
-import erc20Abi from '@/abi/erc20.json';
+import IToken from 'types/IToken';
+import multicall from 'utils/multicall';
+import erc20Abi from 'abi/erc20.json';
 
 import useWeb3 from './useWeb3';
 import useChainId from './useChainId';

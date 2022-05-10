@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
-import AppConfigs from '@/configs';
+import AppConfigs from 'configs';
 
 import themeState from '../states/theme';
 

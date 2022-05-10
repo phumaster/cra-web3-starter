@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import './utils/i18n';
 
@@ -11,10 +11,10 @@ import MainLayout from './shared/layouts/main/MainLayout';
 const App: FC = () => {
   return (
     <MainLayout>
-      <Switch>
-        <Route path="/" exact component={IndexPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<IndexPage />} />
+        <Route element={<NotFoundPage />} />
+      </Routes>
       <ConnectWalletModal />
     </MainLayout>
   );

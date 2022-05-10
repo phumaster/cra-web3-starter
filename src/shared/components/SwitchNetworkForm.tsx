@@ -1,11 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useCallback } from 'react';
-
-import { useHistory } from 'react-router';
 import { useWeb3React } from '@web3-react/core';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { switchNetwork } from '@/utils/web3';
-import chainInfo from '@/utils/chain-info';
+import { switchNetwork } from 'utils/web3';
+import chainInfo from 'utils/chain-info';
+import IChainInfo from 'types/IChainInfo';
 
 import SwitchNetworkItem from './SwitchNetworkItem';
 
@@ -16,14 +15,15 @@ type Props = {
 };
 
 const SwitchNetworkForm: FC<Props> = ({ onClose }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { active } = useWeb3React();
   const handleClickItem = useCallback(
-    (item) => () => {
+    (item: IChainInfo) => () => {
       (async () => {
         try {
           onClose?.();
-          const destination = `${history.location.pathname}?chain=${item.shortName}`;
+          const destination = `${location.pathname}?chain=${item.shortName}`;
           if (active) {
             const switched = await switchNetwork({
               chainId: item.chainId,
@@ -37,7 +37,7 @@ const SwitchNetworkForm: FC<Props> = ({ onClose }) => {
               blockExplorerUrls: item.blockExplorerUrls,
             });
             if (switched) {
-              history.replace(destination);
+              navigate(destination, { replace: true });
             } else {
               alert(`To switch to ${item.name} please do it manually from your wallet menu`);
             }
@@ -50,7 +50,7 @@ const SwitchNetworkForm: FC<Props> = ({ onClose }) => {
         }
       })();
     },
-    [onClose, active],
+    [onClose, location.pathname, active, navigate],
   );
   return (
     <>

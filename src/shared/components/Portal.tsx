@@ -1,9 +1,9 @@
-import { FC, useEffect, useMemo } from 'react';
+import { FC, PropsWithChildren, useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 
 const modalRoot = document.getElementById('modal-root');
 
-const Portal: FC = ({ children }) => {
+const Portal: FC<PropsWithChildren<{}>> = ({ children }) => {
   const el = useMemo(() => document.createElement('div'), []);
 
   useEffect(() => {

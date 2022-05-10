@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot } from 'recoil';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import './shared/styles/global.scss';
 import App from './App';
@@ -11,11 +11,11 @@ import Web3Wrapper from './shared/components/Web3Wrapper';
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <HashRouter>
+      <BrowserRouter>
         <Web3Wrapper>
           <App />
         </Web3Wrapper>
-      </HashRouter>
+      </BrowserRouter>
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root'),

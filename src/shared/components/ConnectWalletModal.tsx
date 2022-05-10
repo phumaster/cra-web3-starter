@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from 'react';
 
 import ProviderItem from './ProviderItem';
 import styles from './ConnectWalletModal.module.scss';
-import { connectorByName, getChainIdFromUri, getProviderByName } from '@/utils/web3';
+import { connectorByName, getChainIdFromUri, getProviderByName } from 'utils/web3';
 import Modal from './Modal';
 import useConnectModal from '../hooks/useConnectModal';
 import useEagerConnect from '../hooks/useEagerConnect';

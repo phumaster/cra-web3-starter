@@ -1,4 +1,4 @@
-import IChainInfo from '@/types/IChainInfo';
+import IChainInfo from 'types/IChainInfo';
 
 import IcBsc from '../assets/icons/bsc.svg';
 import IcEth from '../assets/icons/eth.svg';

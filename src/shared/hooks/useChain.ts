@@ -1,5 +1,5 @@
-import IChainInfo from '@/types/IChainInfo';
-import chainInfo from '@/utils/chain-info';
+import IChainInfo from 'types/IChainInfo';
+import chainInfo from 'utils/chain-info';
 
 import useChainId from './useChainId';
 

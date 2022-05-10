@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import chainInfo from '@/utils/chain-info';
+import chainInfo from 'utils/chain-info';
 
 import useChainId from './useChainId';
 

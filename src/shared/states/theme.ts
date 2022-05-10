@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-import AppConfigs from '@/configs';
+import AppConfigs from 'configs';
 
 type TState = {
   theme: 'dark' | 'light';

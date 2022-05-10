@@ -1,5 +1,5 @@
-import IToken from '@/types/IToken';
-import chainInfo from '@/utils/chain-info';
+import IToken from 'types/IToken';
+import chainInfo from 'utils/chain-info';
 
 import useChainId from './useChainId';
 

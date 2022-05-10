@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import useAccountBalance from '@/shared/hooks/useAccountBalance';
+import useAccountBalance from 'shared/hooks/useAccountBalance';
 
 const pageStyles = {
   color: '#232129',

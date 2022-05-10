@@ -1,5 +1,5 @@
-import AppConfigs from '@/configs';
-import IChainInfo from '@/types/IChainInfo';
+import AppConfigs from 'configs';
+import IChainInfo from 'types/IChainInfo';
 
 const multicallAddresses = AppConfigs.supportedChains.reduce((acc, current) => {
   acc[current.chainId] = current.contracts.multicall;

@@ -1,5 +1,5 @@
-import SwitchNetwork from '@/shared/components/SwitchNetwork';
-import useConnectModal from '@/shared/hooks/useConnectModal';
+import SwitchNetwork from 'shared/components/SwitchNetwork';
+import useConnectModal from 'shared/hooks/useConnectModal';
 
 const PageHeader: React.FC = () => {
   const { open } = useConnectModal();

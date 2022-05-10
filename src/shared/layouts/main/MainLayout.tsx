@@ -1,15 +1,15 @@
 import { Helmet } from 'react-helmet';
-import { useMemo } from 'react';
+import { PropsWithChildren, useMemo } from 'react';
 
-import useWeb3Effect from '@/shared/hooks/useWeb3Effect';
-import useTheme, { useThemeEffect } from '@/shared/hooks/useTheme';
-import AppConfigs from '@/configs';
+import useWeb3Effect from 'shared/hooks/useWeb3Effect';
+import useTheme, { useThemeEffect } from 'shared/hooks/useTheme';
+import AppConfigs from 'configs';
 
 import PageHeader from './PageHeader';
 
 const { dark, light } = AppConfigs.theme;
 
-const MainLayout: React.FC = ({ children }) => {
+const MainLayout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const { theme, setTheme } = useTheme();
 
   const colors = useMemo(() => (theme === 'dark' ? dark.colors : light.colors), [theme]);

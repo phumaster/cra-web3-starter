@@ -7,6 +7,8 @@ import { Web3Provider } from '@ethersproject/providers';
 import query from 'querystring';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 
+import IChainInfo from 'types/IChainInfo';
+
 import { ConnectorNames, POLLING_INTERVAL } from './constants';
 import { coinbaseWallet, injected, walletconnect } from './connectors';
 import IcWalletConnect from '../assets/icons/walletconnect.svg';
@@ -16,7 +18,6 @@ import IcCoinbase from '../assets/icons/coinbase.png';
 import IcMetamask from '../assets/icons/metamask';
 import ChainIds from '../configs/chain';
 import chainInfo from './chain-info';
-import IChainInfo from '@/types/IChainInfo';
 
 type TChainInfo = Pick<IChainInfo, 'chainId' | 'name' | 'currency' | 'rpcUrls' | 'blockExplorerUrls'>;
 

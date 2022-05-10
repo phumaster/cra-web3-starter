@@ -1,7 +1,7 @@
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { useEffect } from 'react';
 
-import { requestBscNetwork } from '@/utils/web3';
+import { requestBscNetwork } from 'utils/web3';
 
 function useRequestBscNetwork(): void {
   const { connector, error, activate } = useWeb3React();

@@ -1,4 +1,4 @@
-import ChainIds from '@/configs/chain';
+import ChainIds from 'configs/chain';
 
 import IToken from './IToken';
 
