@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -8,7 +8,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Web3Wrapper from './shared/components/Web3Wrapper';
 
-ReactDOM.render(
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+root.render(
   <React.StrictMode>
     <RecoilRoot>
       <BrowserRouter>
@@ -18,7 +21,6 @@ ReactDOM.render(
       </BrowserRouter>
     </RecoilRoot>
   </React.StrictMode>,
-  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function
