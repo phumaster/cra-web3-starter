@@ -1,25 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RecoilRoot } from 'recoil';
-import { BrowserRouter } from 'react-router-dom';
 
 import './shared/styles/global.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Web3Wrapper from './shared/components/Web3Wrapper';
+import Providers from 'Providers';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 root.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <BrowserRouter>
-        <Web3Wrapper>
-          <App />
-        </Web3Wrapper>
-      </BrowserRouter>
-    </RecoilRoot>
+    <Providers>
+      <App />
+    </Providers>
   </React.StrictMode>,
 );
 

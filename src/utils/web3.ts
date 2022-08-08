@@ -17,19 +17,19 @@ import IcTrustWallet from '../assets/icons/trustwallet.svg';
 import IcCoinbase from '../assets/icons/coinbase.png';
 import IcMetamask from '../assets/icons/metamask';
 import ChainIds from '../configs/chain';
-import chainInfo from './chain-info';
+import AppConfigs from 'configs';
 
 type TChainInfo = Pick<IChainInfo, 'chainId' | 'name' | 'currency' | 'rpcUrls' | 'blockExplorerUrls'>;
 
 export function getRpcUrl(chain?: ChainIds): string {
-  return chainInfo.chains[chain || ChainIds.BSC_MAINNET].rpcUrls[
-    Math.floor(Math.random() * chainInfo.chains[chain || ChainIds.BSC_MAINNET].rpcUrls.length)
+  return AppConfigs.chains[chain || ChainIds.BSC_MAINNET].rpcUrls[
+    Math.floor(Math.random() * AppConfigs.chains[chain || ChainIds.BSC_MAINNET].rpcUrls.length)
   ];
 }
 
 export function getTestnetRpcUrl(chain?: ChainIds): string {
-  return chainInfo.chains[chain || ChainIds.BSC_TESTNET].rpcUrls[
-    Math.floor(Math.random() * chainInfo.chains[chain || ChainIds.BSC_TESTNET].rpcUrls.length)
+  return AppConfigs.chains[chain || ChainIds.BSC_TESTNET].rpcUrls[
+    Math.floor(Math.random() * AppConfigs.chains[chain || ChainIds.BSC_TESTNET].rpcUrls.length)
   ];
 }
 
@@ -135,16 +135,17 @@ export async function switchNetwork(options: TChainInfo): Promise<boolean> {
 }
 
 export async function requestBscNetwork(): Promise<boolean> {
+  const bsc = AppConfigs.chains[ChainIds.BSC_MAINNET];
   const requested = await requestNetwork({
     chainId: ChainIds.BSC_MAINNET,
-    name: 'Binance Smart Chain Mainnet',
+    name: bsc.name,
     currency: {
-      name: 'BNB',
-      symbol: 'bnb',
-      decimals: 18,
+      name: bsc.currency.name,
+      symbol: bsc.currency.symbol,
+      decimals: bsc.currency.decimals,
     },
-    rpcUrls: chainInfo.chains[ChainIds.BSC_MAINNET].rpcUrls,
-    blockExplorerUrls: chainInfo.chains[ChainIds.BSC_MAINNET].blockExplorerUrls,
+    rpcUrls: bsc.rpcUrls,
+    blockExplorerUrls: bsc.blockExplorerUrls,
   });
   return requested;
 }
@@ -155,6 +156,7 @@ const httpProvider = new Web3.providers.HttpProvider(
     timeout: 10000,
   },
 );
+
 export const web3NoAccount = new Web3(httpProvider);
 
 export function chainToId(chain: string): ChainIds {
