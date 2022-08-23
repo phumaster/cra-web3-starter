@@ -1,51 +1,39 @@
 {
-  "name": "cra-web3-starter",
+  "name": "cra",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ethersproject/bignumber": "^5.6.0",
-    "@ethersproject/constants": "^5.6.0",
-    "@ethersproject/providers": "^5.6.5",
-    "@ethersproject/units": "^5.6.0",
+    "@chakra-ui/react": "^1.8.8",
+    "@emotion/react": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
     "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.2.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@walletconnect/web3-provider": "^1.7.8",
-    "@web3-react/core": "^6.1.9",
-    "@web3-react/injected-connector": "^6.0.7",
-    "@web3-react/walletconnect-connector": "^6.2.13",
-    "@web3-react/walletlink-connector": "^6.2.14",
-    "classnames": "^2.3.1",
-    "formik": "^2.2.9",
-    "i18next": "^21.8.0",
-    "node-sass": "6.0",
+    "@testing-library/react": "^13.0.1",
+    "@testing-library/user-event": "^14.1.0",
+    "@types/jest": "^28.1.1",
+    "@types/node": "^12.0.0",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.4",
+    "ethers": "^5.7.0",
+    "framer-motion": "4.1.17",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-helmet": "^6.1.0",
-    "react-i18next": "^11.16.9",
-    "react-router-dom": "^6.3.0",
+    "react-icons": "^3.0.0",
     "react-scripts": "4.0.3",
-    "react-use": "^17.3.2",
-    "recoil": "^0.7.3-alpha.2",
-    "typescript": "^4.6.4",
-    "web-vitals": "^2.1.4",
-    "web3": "^1.7.3",
-    "yup": "^0.32.11"
+    "react-use": "^17.4.0",
+    "typescript": "^4.6.3",
+    "wagmi": "^0.6.4",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "./node_modules/.bin/prettier --write src/**/*.{ts,tsx,json,scss}",
-    "lint": "eslint src/**/*.{ts,tsx} --quiet --fix",
-    "postinstall": "husky install"
+    "format": "./node_modules/.bin/prettier --write src/**/*.{ts,tsx}",
+    "lint": "eslint src/**/*.{ts,tsx} --quiet --fix"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -60,15 +48,8 @@
     ]
   },
   "devDependencies": {
-    "@types/classnames": "^2.3.1",
-    "@types/jest": "^27.5.0",
-    "@types/node": "^17.0.31",
-    "@types/react": "^18.0.9",
-    "@types/react-dom": "^18.0.3",
-    "eslint": "^7.11.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^8.0.1",
-    "prettier": "^2.6.2"
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1"
   }
 }

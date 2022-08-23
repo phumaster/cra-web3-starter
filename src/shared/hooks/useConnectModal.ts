@@ -1,21 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback } from 'react';
-import { useRecoilState } from 'recoil';
+import useAppState from './useAppState';
 
-import modalState from '../states/modal';
+function useConnectModal() {
+  const { connectModalVisible, setAppState } = useAppState();
 
-function useConnectModal(): {
-  open(): void;
-  close(): void;
-  visible: boolean;
-} {
-  const [state, setState] = useRecoilState(modalState);
-  const open = useCallback(() => setState(true), []);
-  const close = useCallback(() => setState(false), []);
+  const open = useCallback(() => setAppState((prev) => ({ ...prev, connectModalVisible: true })), [setAppState]);
+  const close = useCallback(() => setAppState((prev) => ({ ...prev, connectModalVisible: false })), [setAppState]);
+
   return {
+    visible: connectModalVisible,
     open,
     close,
-    visible: state,
   };
 }
 

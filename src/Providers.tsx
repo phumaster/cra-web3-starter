@@ -1,15 +1,13 @@
 import { FC, PropsWithChildren } from 'react';
-import { RecoilRoot } from 'recoil';
-import { BrowserRouter } from 'react-router-dom';
 
-import Web3Wrapper from 'shared/components/Web3Wrapper';
+import { ChakraProvider, theme } from '@chakra-ui/react';
+import { WagmiConfig } from 'wagmi';
+import { client } from 'utils/wagmi';
 
 const Providers: FC<PropsWithChildren<{}>> = ({ children }) => (
-  <RecoilRoot>
-    <BrowserRouter>
-      <Web3Wrapper>{children}</Web3Wrapper>
-    </BrowserRouter>
-  </RecoilRoot>
+  <WagmiConfig client={client}>
+    <ChakraProvider theme={theme}>{children}</ChakraProvider>
+  </WagmiConfig>
 );
 
 export default Providers;

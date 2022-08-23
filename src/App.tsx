@@ -1,18 +1,35 @@
-import { FC } from 'react';
+import { Box, VStack, Grid, Button } from '@chakra-ui/react';
+import { useAccount, useNetwork } from 'wagmi';
 
-import 'utils/i18n';
+import useConnectModal from 'shared/hooks/useConnectModal';
+import MainLayout from 'shared/layouts/MainLayout';
+import useSwitchNetworkModal from 'shared/hooks/useSwitchNetworkModal';
+import { ColorModeSwitcher } from './ColorModeSwitcher';
+import useAuth from 'shared/hooks/useAuth';
 
-import ConnectWalletModal from 'shared/components/ConnectWalletModal';
-import MainLayout from 'shared/layouts/main/MainLayout';
-import Router from 'Router';
+export const App = () => {
+  const { logout } = useAuth();
+  const { address, isConnected } = useAccount();
+  const { chain } = useNetwork();
+  const connectModal = useConnectModal();
+  const switchNetworkModal = useSwitchNetworkModal();
 
-const App: FC = () => {
   return (
     <MainLayout>
-      <Router />
-      <ConnectWalletModal />
+      <Box textAlign="center" fontSize="xl">
+        <Grid minH="100vh" p={3}>
+          <ColorModeSwitcher justifySelf="flex-end" />
+          <VStack spacing={2}>
+            <Button onClick={switchNetworkModal.open}>Switch Network {chain?.name}</Button>
+            <Button onClick={connectModal.open} disabled={isConnected}>
+              Connect Wallet
+            </Button>
+            <Button onClick={logout} disabled={!isConnected}>
+              Disconnect {address}
+            </Button>
+          </VStack>
+        </Grid>
+      </Box>
     </MainLayout>
   );
 };
-
-export default App;

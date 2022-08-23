@@ -18,7 +18,6 @@ module.exports = {
     'react-app',
     'react-app/jest',
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
     'plugin:prettier/recommended', // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
   ],
   rules: {
@@ -31,14 +30,15 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
-    "@typescript-eslint/ban-types": [
-      "error",
+    '@typescript-eslint/ban-types': [
+      'error',
       {
-        "extendDefaults": true,
-        "types": {
-          "{}": false
-        }
-      }
+        extendDefaults: true,
+        types: {
+          '{}': false,
+        },
+      },
     ],
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
 };
